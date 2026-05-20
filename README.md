@@ -42,9 +42,7 @@ git clone https://github.com/miltonjss/produtos-api.git
 
  ```
  cd produtos-api
- dotnet run
-    
-    
+ dotnet run  
   ```
     
  5. **Acessar Swagger**
