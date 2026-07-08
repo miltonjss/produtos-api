@@ -22,6 +22,17 @@ namespace ProdutosAPI.Controllers
             return await _context.Produtos.ToListAsync();
         }
 
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Produto>> GetProdutoId(int id)
+        {
+            var existing = await _context.Produtos.FirstOrDefaultAsync(e => e.id == id);
+            if (existing == null)
+            {
+                return NotFound();
+            }
+            return existing;
+
+        }
         [HttpPost]
         public async Task<IActionResult> PostProdutos(Produto produto)
         {

@@ -18,7 +18,24 @@ namespace ProdutosAPI
             builder.Services.AddDbContext<Connection>(options => options.UseMySql(
                 builder.Configuration.GetConnectionString("DefaultConnection"), new MySqlServerVersion(new Version (8,0,45))));
 
+            
+
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowReactApp",
+                    policy => policy
+                        .WithOrigins("http://localhost:5173")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod());
+            });
+
             var app = builder.Build();
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var db = scope.ServiceProvider.GetRequiredService<Connection>();
+                db.Database.Migrate();
+            }
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
@@ -28,6 +45,8 @@ namespace ProdutosAPI
             }
 
             app.UseHttpsRedirection();
+
+            app.UseCors("AllowReactApp");
 
             app.UseAuthorization();
 
