@@ -32,20 +32,13 @@ git clone https://github.com/miltonjss/produtos-api.git
   "DefaultConnection": "Server=localhost;Database=produtos;User=root;Password=SENHA"
 }
 ```
-3.  **Aplicar as migrations**
+3.  **Rodar a API**
 
    ```
-   dotnet ef database update 
-  ```
-    
-4. **Rodar a API**
-
- ```
  cd produtos-api
- dotnet run  
+ dotnet run 
   ```
-    
- 5. **Acessar Swagger**
+ 4. **Acessar Swagger**
    
    ```
    https://localhost:7206/swagger
